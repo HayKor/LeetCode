@@ -39,28 +39,24 @@ class Solution:
     def addTwoNumbers(
         self, l1: Optional[ListNode], l2: Optional[ListNode]
     ) -> Optional[ListNode]:
-        res: Optional[ListNode] = ListNode(0)
+        head = ListNode(0)
+        tail = head
         tmp = 0
-        while None not in (l1, l2) or tmp:
-            if l1 is None:
-                num1 = 0
-            else:
-                num1 = l1.val
-            if l2 is None:
-                num2 = 0
-            else:
-                num2 = l2.val
+        while l1 is not None or l2 is not None or tmp:
+            num1 = l1.val if l1 is not None else 0
+            num2 = l2.val if l2 is not None else 0
+
             tmp_sum = num1 + num2 + tmp
-            tmp = 0
-            if tmp_sum >= 10:
-                tmp, tmp_sum = tmp_sum // 10, tmp_sum % 10
-            res.val = tmp_sum
-            res.next = ListNode(0)
-            res = res.next
-            if l1 is not None:
-                l1 = l1.next
-            if l2 is not None:
-                l2 = l2.next
+            tmp, tmp_sum = tmp_sum // 10, tmp_sum % 10
+
+            tail.next = ListNode(tmp_sum)
+            tail = tail.next
+
+            l1 = l1.next if l1 is not None else None
+            l2 = l2.next if l2 is not None else None
+        result = head.next
+        # head.next = None
+        return result
 
 
 sol = Solution()
