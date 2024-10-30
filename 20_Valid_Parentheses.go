@@ -7,10 +7,10 @@ func isValid(s string) bool {
 		case '(', '[', '{':
 			stack = append(stack, sym)
 		default:
-			if len(stack) == 0 ||
-				(sym == ')' && stack[len(stack)-1] != '(') ||
-				(sym == '}' && stack[len(stack)-1] != '{') ||
-				(sym == ']' && stack[len(stack)-1] != '[') {
+			if length := len(stack); length == 0 ||
+				(sym == ')' && stack[length-1] != '(') ||
+				(sym == '}' && stack[length-1] != '{') ||
+				(sym == ']' && stack[length-1] != '[') {
 				return false
 			}
 			stack = stack[:len(stack)-1]
